@@ -10,8 +10,8 @@ export function AgentChat() {
         cwd="~/projects/support-bot"
         prompt="scaffold a support bot with build-agent"
         response={[
-          "→ Framework: Vercel AI SDK",
-          "→ Agent loop + 3 tools scaffolded",
+          "→ Vercel AI SDK — verifying latest docs",
+          "→ Scaffolding agent core, tools, API...",
           "✓ Ready to deploy",
         ]}
         speed={2}

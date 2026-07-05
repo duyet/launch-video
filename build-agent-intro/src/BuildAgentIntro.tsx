@@ -14,7 +14,7 @@ import { TerminalRun } from "@/scenes/TerminalRun";
 const { fontFamily: sansFamily } = loadSans();
 const { fontFamily: monoFamily } = loadMono();
 
-const HOOK = 110;
+const HOOK = 60;
 const CHAT = 130;
 const TERMINAL = 150;
 const FRAMEWORKS = 170;

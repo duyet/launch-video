@@ -1,10 +1,18 @@
 import { Backdrop } from "@/components/remocn/backdrop";
-import { InfiniteMarquee } from "@/components/remocn/infinite-marquee";
 import { MicroScaleFade } from "@/components/remocn/micro-scale-fade";
-import { BG, FG, FG_MUTED } from "@/theme";
+import { FrameworkChip } from "@/components/FrameworkChip";
+import { BG, FG } from "@/theme";
 
-const FRAMEWORKS =
-  "LangGraph  ·  Vercel AI SDK  ·  eve  ·  Flue  ·  CrewAI  ·  LlamaIndex  ·  Mastra  ·  Google ADK  ·  ";
+const FRAMEWORKS = [
+  { name: "LangGraph", initials: "LG" },
+  { name: "Vercel AI SDK", initials: "AI" },
+  { name: "Claude Agent SDK", initials: "CA" },
+  { name: "OpenAI Agents SDK", initials: "OA" },
+  { name: "Mastra", initials: "M" },
+  { name: "Cloudflare Agents", initials: "CF" },
+  { name: "eve", initials: "e" },
+  { name: "Flue", initials: "F" },
+];
 
 export function FrameworkList() {
   return (
@@ -17,7 +25,7 @@ export function FrameworkList() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          gap: 24,
+          gap: 32,
         }}
       >
         <div style={{ position: "relative", width: 760, height: 50 }}>
@@ -28,14 +36,21 @@ export function FrameworkList() {
             color={FG}
           />
         </div>
-        <div style={{ position: "relative", width: "100%", height: 70 }}>
-          <InfiniteMarquee
-            text={FRAMEWORKS}
-            fontSize={44}
-            fontWeight={600}
-            color={FG_MUTED}
-            pixelsPerFrame={1.6}
-          />
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 280px)",
+            gap: 16,
+          }}
+        >
+          {FRAMEWORKS.map((fw, i) => (
+            <FrameworkChip
+              key={fw.name}
+              name={fw.name}
+              initials={fw.initials}
+              delay={20 + i * 5}
+            />
+          ))}
         </div>
       </div>
     </Backdrop>

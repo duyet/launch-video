@@ -1,8 +1,6 @@
 import { Backdrop } from "@/components/remocn/backdrop";
 import { CtaLine } from "@/components/CtaLine";
-import { InlineHighlight } from "@/components/remocn/inline-highlight";
 import { ShaderNeuroNoise } from "@/components/remocn/shader-neuro-noise";
-import { ACCENT } from "@/theme";
 
 export function Hook() {
   return (
@@ -24,24 +22,15 @@ export function Hook() {
           position: "absolute",
           inset: 0,
           display: "flex",
-          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          gap: 28,
         }}
       >
-        <div style={{ position: "relative", width: 1000, height: 90 }}>
-          <InlineHighlight
-            before="This is "
-            highlight="build-agent."
-            baseColor="#fafafa"
-            highlightColor={ACCENT}
-            fontSize={56}
-            fontWeight={600}
-            speed={2.2}
-          />
-        </div>
-        <CtaLine text="$ npx skills add duyet/build-agent" appearAt={22} />
+        <CtaLine
+          text="$ npx skills add duyet/build-agent"
+          appearAt={4}
+          fontSize={46}
+        />
       </div>
     </Backdrop>
   );
