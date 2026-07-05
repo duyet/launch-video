@@ -5,10 +5,12 @@ export function CtaLine({
   text,
   appearAt = 0,
   fontSize = 38,
+  color = FG,
 }: {
   text: string;
   appearAt?: number;
   fontSize?: number;
+  color?: string;
 }) {
   const frame = useCurrentFrame() - appearAt;
   const words = text.split(" ");
@@ -50,11 +52,12 @@ export function CtaLine({
         );
         return (
           <span
-            key={i}
+            // biome-ignore lint/suspicious/noArrayIndexKey: static word list, order never changes during a render
+            key={`${i}-${word}`}
             style={{
               marginRight: "0.35em",
               opacity,
-              color: word === "$" ? ACCENT : FG,
+              color: word === "$" ? ACCENT : color,
             }}
           >
             {word}

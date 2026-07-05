@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path // empty' | { read -r f; [ -z \"$f\" ] && exit 0; case \"$f\" in *.ts|*.tsx) ;; *) exit 0 ;; esac; dir=$(dirname \"$f\"); while [ \"$dir\" != \"/\" ] && [ ! -f \"$dir/tsconfig.json\" ]; do dir=$(dirname \"$dir\"); done; [ -f \"$dir/tsconfig.json\" ] || exit 0; cd \"$dir\" && bunx tsc --noEmit; }",
+            "timeout": 60,
+            "statusMessage": "Type-checking..."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,11 +1,16 @@
+import { CtaLine } from "@/components/CtaLine";
 import { Backdrop } from "@/components/remocn/backdrop";
 import { MicroScaleFade } from "@/components/remocn/micro-scale-fade";
-import { CtaLine } from "@/components/CtaLine";
 import { BG, FG, FG_MUTED } from "@/theme";
 
 export function SignOff() {
   return (
-    <Backdrop fill={{ type: "color", value: BG }} padding={0}>
+    <Backdrop
+      fill={{ type: "color", value: BG }}
+      padding={0}
+      radius={0}
+      shadow=""
+    >
       <div
         style={{
           position: "absolute",
@@ -18,7 +23,12 @@ export function SignOff() {
         }}
       >
         <div style={{ position: "relative", width: 640, height: 90 }}>
-          <MicroScaleFade text="build-agent" fontSize={64} color={FG} speed={1.5} />
+          <MicroScaleFade
+            text="build-agent"
+            fontSize={64}
+            color={FG}
+            speed={1.5}
+          />
         </div>
         <div style={{ position: "relative", width: 760, height: 50 }}>
           <MicroScaleFade

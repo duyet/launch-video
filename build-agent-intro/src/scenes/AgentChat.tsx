@@ -4,13 +4,18 @@ import { BG } from "@/theme";
 
 export function AgentChat() {
   return (
-    <Backdrop fill={{ type: "color", value: BG }} padding={0}>
+    <Backdrop
+      fill={{ type: "color", value: BG }}
+      padding={0}
+      radius={0}
+      shadow=""
+    >
       <ClaudeCode
         userName="Dev"
         cwd="~/projects/support-bot"
-        prompt="scaffold a support bot with build-agent"
+        prompt="/build-agent build customer support agent with eve framework"
         response={[
-          "→ Vercel AI SDK — verifying latest docs",
+          "→ Framework: eve",
           "→ Scaffolding agent core, tools, API...",
           "✓ Ready to deploy",
         ]}

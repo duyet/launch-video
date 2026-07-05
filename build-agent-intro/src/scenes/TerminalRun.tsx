@@ -3,8 +3,8 @@ import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
 import { Backdrop } from "@/components/remocn/backdrop";
 import { Cursor } from "@/components/remocn/cursor";
 import {
-  TerminalSimulator,
   type TerminalLine,
+  TerminalSimulator,
 } from "@/components/remocn/terminal-simulator";
 import { useCursorPath } from "@/components/remocn/use-cursor-path";
 import { ACCENT, BG } from "@/theme";
@@ -12,7 +12,7 @@ import { ACCENT, BG } from "@/theme";
 const LINES: TerminalLine[] = [
   { text: "npx skills add duyet/build-agent", type: "command", delay: 6 },
   {
-    text: "Framework detected: Vercel AI SDK",
+    text: "Framework: eve",
     type: "log",
     delay: 6,
   },
@@ -74,7 +74,12 @@ function ClickCursor() {
 
 export function TerminalRun() {
   return (
-    <Backdrop fill={{ type: "color", value: BG }} padding={0}>
+    <Backdrop
+      fill={{ type: "color", value: BG }}
+      padding={0}
+      radius={0}
+      shadow=""
+    >
       <ZoomIn>
         <TerminalSimulator
           lines={LINES}

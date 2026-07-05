@@ -1,13 +1,15 @@
-import type { CSSProperties } from "react";
-import { loadFont as loadSans } from "@remotion/google-fonts/Inter";
 import { loadFont as loadMono } from "@remotion/google-fonts/GeistMono";
-import { TransitionSeries, linearTiming } from "@remotion/transitions";
+import { loadFont as loadSans } from "@remotion/google-fonts/Inter";
+import { linearTiming, TransitionSeries } from "@remotion/transitions";
+import type { CSSProperties } from "react";
+import { ditherDissolve } from "@/components/remocn/dither-dissolve";
 import { grainDissolve } from "@/components/remocn/grain-dissolve";
 import { pushThrough } from "@/components/remocn/push-through";
 import { whipPan } from "@/components/remocn/whip-pan";
 import { AgentChat } from "@/scenes/AgentChat";
 import { FrameworkList } from "@/scenes/FrameworkList";
 import { Hook } from "@/scenes/Hook";
+import { ScaffoldLayers } from "@/scenes/ScaffoldLayers";
 import { SignOff } from "@/scenes/SignOff";
 import { TerminalRun } from "@/scenes/TerminalRun";
 
@@ -17,15 +19,23 @@ const { fontFamily: monoFamily } = loadMono();
 const HOOK = 60;
 const CHAT = 130;
 const TERMINAL = 150;
+const SCAFFOLD = 180;
 const FRAMEWORKS = 170;
 const SIGNOFF = 130;
 const T1 = 16; // hook -> chat
-const T2 = 16; // chat -> terminal
-const T3 = 60; // terminal -> framework list
-const T4 = 24; // framework list -> sign-off
+const T2 = 40; // chat -> terminal (dither-dissolve)
+const T3 = 60; // terminal -> scaffold layers (grain-dissolve)
+const T4 = 16; // scaffold layers -> framework list
+const T5 = 24; // framework list -> sign-off
 
 export const BUILD_AGENT_INTRO_DURATION =
-  HOOK + CHAT + TERMINAL + FRAMEWORKS + SIGNOFF - (T1 + T2 + T3 + T4);
+  HOOK +
+  CHAT +
+  TERMINAL +
+  SCAFFOLD +
+  FRAMEWORKS +
+  SIGNOFF -
+  (T1 + T2 + T3 + T4 + T5);
 
 export function BuildAgentIntro() {
   return (
@@ -56,7 +66,10 @@ export function BuildAgentIntro() {
 
         <TransitionSeries.Transition
           timing={linearTiming({ durationInFrames: T2 })}
-          presentation={whipPan({ direction: "down" })}
+          presentation={ditherDissolve({
+            colorBack: "#0a0a0a",
+            colorFront: "#5a4a42",
+          })}
         />
 
         <TransitionSeries.Sequence durationInFrames={TERMINAL}>
@@ -71,12 +84,21 @@ export function BuildAgentIntro() {
           })}
         />
 
+        <TransitionSeries.Sequence durationInFrames={SCAFFOLD}>
+          <ScaffoldLayers />
+        </TransitionSeries.Sequence>
+
+        <TransitionSeries.Transition
+          timing={linearTiming({ durationInFrames: T4 })}
+          presentation={whipPan({ direction: "left" })}
+        />
+
         <TransitionSeries.Sequence durationInFrames={FRAMEWORKS}>
           <FrameworkList />
         </TransitionSeries.Sequence>
 
         <TransitionSeries.Transition
-          timing={linearTiming({ durationInFrames: T4 })}
+          timing={linearTiming({ durationInFrames: T5 })}
           presentation={pushThrough()}
         />
 

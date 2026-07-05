@@ -1,8 +1,8 @@
 "use client";
 
 import {
-  Sequence,
   interpolate,
+  Sequence,
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
@@ -183,7 +183,8 @@ export function TerminalSimulator({
           >
             {lines.map((line, index) => (
               <Sequence
-                key={index}
+                // biome-ignore lint/suspicious/noArrayIndexKey: static list, order never changes during a render
+                key={`${index}-${line.text}`}
                 from={Math.round(starts[index] / speed)}
                 layout="none"
               >
@@ -289,4 +290,3 @@ function TerminalLineRow({
     </div>
   );
 }
-

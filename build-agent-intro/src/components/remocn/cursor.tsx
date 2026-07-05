@@ -86,8 +86,8 @@ export function Cursor({
           transformOrigin: "center",
         }}
       />
-      {}
       <svg
+        aria-hidden="true"
         width={size}
         height={size}
         viewBox="0 0 24 24"
@@ -113,4 +113,3 @@ export function Cursor({
     </div>
   );
 }
-

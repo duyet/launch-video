@@ -1,6 +1,6 @@
 "use client";
 
-import { NeuroNoise, type NeuroNoiseProps } from "@paper-design/shaders-react";
+import { Dithering, type DitheringProps } from "@paper-design/shaders-react";
 import { useCallback, useState } from "react";
 import {
   continueRender,
@@ -9,23 +9,23 @@ import {
   useVideoConfig,
 } from "remotion";
 
-export interface ShaderNeuroNoiseProps
-  extends Omit<NeuroNoiseProps, "frame" | "ref"> {}
+export interface ShaderDitheringProps
+  extends Omit<DitheringProps, "frame" | "ref"> {}
 
-export function ShaderNeuroNoise({
+export function ShaderDithering({
   speed = 1,
-  colorFront = "#8a8a95",
-  colorMid = "#4a4a68",
   colorBack = "#12121a",
-  brightness = 0.05,
-  contrast = 0.3,
+  colorFront = "#6a6a85",
+  shape = "wave",
+  type = "4x4",
+  size = 2,
   className,
   ...rest
-}: ShaderNeuroNoiseProps) {
+}: ShaderDitheringProps) {
   const frame = useCurrentFrame();
   const { fps, width, height } = useVideoConfig();
 
-  const [handle] = useState(() => delayRender("shader-neuro-noise"));
+  const [handle] = useState(() => delayRender("shader-dithering"));
   const gate = useCallback(
     (element: HTMLDivElement | null) => {
       if (!element) return;
@@ -42,14 +42,14 @@ export function ShaderNeuroNoise({
       className={className}
       style={{ position: "absolute", inset: 0 }}
     >
-      <NeuroNoise
+      <Dithering
         speed={0}
         frame={(frame / fps) * speed * 1000}
-        colorFront={colorFront}
-        colorMid={colorMid}
         colorBack={colorBack}
-        brightness={brightness}
-        contrast={contrast}
+        colorFront={colorFront}
+        shape={shape}
+        type={type}
+        size={size}
         fit="cover"
         width={width}
         height={height}
@@ -58,4 +58,3 @@ export function ShaderNeuroNoise({
     </div>
   );
 }
-

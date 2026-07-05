@@ -1,21 +1,16 @@
-import { Backdrop } from "@/components/remocn/backdrop";
 import { CtaLine } from "@/components/CtaLine";
-import { ShaderNeuroNoise } from "@/components/remocn/shader-neuro-noise";
+import { Backdrop } from "@/components/remocn/backdrop";
+
+const LIGHT_BG = "#f2f0eb";
+const LIGHT_FG = "#171717";
 
 export function Hook() {
   return (
     <Backdrop
-      fill={
-        <ShaderNeuroNoise
-          colorFront="#4a3a35"
-          colorMid="#2a201d"
-          colorBack="#0a0a0a"
-          brightness={0.06}
-          contrast={0.3}
-          speed={0.25}
-        />
-      }
+      fill={{ type: "color", value: LIGHT_BG }}
       padding={0}
+      radius={0}
+      shadow=""
     >
       <div
         style={{
@@ -30,6 +25,7 @@ export function Hook() {
           text="$ npx skills add duyet/build-agent"
           appearAt={4}
           fontSize={46}
+          color={LIGHT_FG}
         />
       </div>
     </Backdrop>

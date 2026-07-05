@@ -476,4 +476,3 @@ export function ClaudeCode({
     </AbsoluteFill>
   );
 }
-
