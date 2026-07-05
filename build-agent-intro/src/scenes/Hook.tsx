@@ -1,4 +1,5 @@
 import { Backdrop } from "@/components/remocn/backdrop";
+import { CtaLine } from "@/components/CtaLine";
 import { DynamicGrid } from "@/components/remocn/dynamic-grid";
 import { InlineHighlight } from "@/components/remocn/inline-highlight";
 import { ACCENT } from "@/theme";
@@ -16,14 +17,30 @@ export function Hook() {
       }
       padding={0}
     >
-      <InlineHighlight
-        before="Stop scaffolding agents "
-        highlight="from scratch."
-        baseColor="#fafafa"
-        highlightColor={ACCENT}
-        fontSize={56}
-        fontWeight={600}
-      />
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 28,
+        }}
+      >
+        <div style={{ position: "relative", width: 1000, height: 90 }}>
+          <InlineHighlight
+            before="This is "
+            highlight="build-agent."
+            baseColor="#fafafa"
+            highlightColor={ACCENT}
+            fontSize={56}
+            fontWeight={600}
+            speed={2.2}
+          />
+        </div>
+        <CtaLine text="npx skills add duyet/build-agent" appearAt={22} />
+      </div>
     </Backdrop>
   );
 }

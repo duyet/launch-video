@@ -8,7 +8,8 @@ export function AgentChat() {
       <ClaudeCode
         userName="Dev"
         cwd="~/projects/support-bot"
-        prompt="use the build-agent skill to scaffold a support bot"
+        prompt="scaffold a support bot with build-agent"
+        speed={2}
       />
     </Backdrop>
   );

@@ -2,18 +2,26 @@ import type { CSSProperties } from "react";
 import { loadFont as loadSans } from "@remotion/google-fonts/Inter";
 import { loadFont as loadMono } from "@remotion/google-fonts/GeistMono";
 import { TransitionSeries, linearTiming } from "@remotion/transitions";
-import { fade } from "@remotion/transitions/fade";
 import { pushThrough } from "@/components/remocn/push-through";
 import { whipPan } from "@/components/remocn/whip-pan";
 import { AgentChat } from "@/scenes/AgentChat";
 import { Hook } from "@/scenes/Hook";
-import { ResultReveal } from "@/scenes/ResultReveal";
 import { SignOff } from "@/scenes/SignOff";
 import { TerminalRun } from "@/scenes/TerminalRun";
-import { ValueLine } from "@/scenes/ValueLine";
 
 const { fontFamily: sansFamily } = loadSans();
 const { fontFamily: monoFamily } = loadMono();
+
+const HOOK = 110;
+const CHAT = 130;
+const TERMINAL = 150;
+const SIGNOFF = 130;
+const T1 = 16; // hook -> chat
+const T2 = 16; // chat -> terminal
+const T3 = 24; // terminal -> sign-off
+
+export const BUILD_AGENT_INTRO_DURATION =
+  HOOK + CHAT + TERMINAL + SIGNOFF - (T1 + T2 + T3);
 
 export function BuildAgentIntro() {
   return (
@@ -29,58 +37,37 @@ export function BuildAgentIntro() {
       }
     >
       <TransitionSeries>
-      <TransitionSeries.Sequence durationInFrames={150}>
-        <Hook />
-      </TransitionSeries.Sequence>
+        <TransitionSeries.Sequence durationInFrames={HOOK}>
+          <Hook />
+        </TransitionSeries.Sequence>
 
-      <TransitionSeries.Transition
-        timing={linearTiming({ durationInFrames: 20 })}
-        presentation={whipPan({ direction: "left" })}
-      />
+        <TransitionSeries.Transition
+          timing={linearTiming({ durationInFrames: T1 })}
+          presentation={whipPan({ direction: "left" })}
+        />
 
-      <TransitionSeries.Sequence durationInFrames={260}>
-        <AgentChat />
-      </TransitionSeries.Sequence>
+        <TransitionSeries.Sequence durationInFrames={CHAT}>
+          <AgentChat />
+        </TransitionSeries.Sequence>
 
-      <TransitionSeries.Transition
-        timing={linearTiming({ durationInFrames: 20 })}
-        presentation={whipPan({ direction: "down" })}
-      />
+        <TransitionSeries.Transition
+          timing={linearTiming({ durationInFrames: T2 })}
+          presentation={whipPan({ direction: "down" })}
+        />
 
-      <TransitionSeries.Sequence durationInFrames={400}>
-        <TerminalRun />
-      </TransitionSeries.Sequence>
+        <TransitionSeries.Sequence durationInFrames={TERMINAL}>
+          <TerminalRun />
+        </TransitionSeries.Sequence>
 
-      <TransitionSeries.Transition
-        timing={linearTiming({ durationInFrames: 40 })}
-        presentation={pushThrough()}
-      />
+        <TransitionSeries.Transition
+          timing={linearTiming({ durationInFrames: T3 })}
+          presentation={pushThrough()}
+        />
 
-      <TransitionSeries.Sequence durationInFrames={150}>
-        <ValueLine />
-      </TransitionSeries.Sequence>
-
-      <TransitionSeries.Transition
-        timing={linearTiming({ durationInFrames: 26 })}
-        presentation={whipPan({ direction: "left" })}
-      />
-
-      <TransitionSeries.Sequence durationInFrames={210}>
-        <ResultReveal />
-      </TransitionSeries.Sequence>
-
-      <TransitionSeries.Transition
-        timing={linearTiming({ durationInFrames: 20 })}
-        presentation={fade()}
-      />
-
-        <TransitionSeries.Sequence durationInFrames={150}>
+        <TransitionSeries.Sequence durationInFrames={SIGNOFF}>
           <SignOff />
         </TransitionSeries.Sequence>
       </TransitionSeries>
     </div>
   );
 }
-
-export const BUILD_AGENT_INTRO_DURATION =
-  150 + 260 + 400 + 150 + 210 + 150 - (20 + 20 + 40 + 26 + 20);

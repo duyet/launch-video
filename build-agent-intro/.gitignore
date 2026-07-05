@@ -1,4 +1,5 @@
 node_modules
-out
+out/*
+!out/build-agent-intro.mp4
 .DS_Store
 *.log
