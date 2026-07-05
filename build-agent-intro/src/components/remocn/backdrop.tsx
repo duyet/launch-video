@@ -6,7 +6,8 @@ import { AbsoluteFill, Img, useVideoConfig } from "remotion";
 export type BackdropFill =
   | { type: "color"; value: string }
   | { type: "gradient"; value: string }
-  | { type: "image"; src: string; fit?: "cover" | "contain" };
+  | { type: "image"; src: string; fit?: "cover" | "contain" }
+  | { type: "transparent" };
 
 export interface BackdropProps {
   fill?: BackdropFill | ReactNode;
@@ -35,6 +36,7 @@ function FillLayer({ fill }: { fill: BackdropFill }) {
     );
   }
 
+  if (fill.type === "transparent") return <AbsoluteFill />;
   return <AbsoluteFill style={{ background: fill.value }} />;
 }
 

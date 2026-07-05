@@ -5,6 +5,7 @@ import type { CSSProperties } from "react";
 import { ditherDissolve } from "@/components/remocn/dither-dissolve";
 import { grainDissolve } from "@/components/remocn/grain-dissolve";
 import { pushThrough } from "@/components/remocn/push-through";
+import { ShaderGrainGradient } from "@/components/remocn/shader-grain-gradient";
 import { whipPan } from "@/components/remocn/whip-pan";
 import { AgentChat } from "@/scenes/AgentChat";
 import { FrameworkList } from "@/scenes/FrameworkList";
@@ -22,7 +23,7 @@ const TERMINAL = 150;
 const SCAFFOLD = 180;
 const FRAMEWORKS = 170;
 const SIGNOFF = 130;
-const T1 = 16; // hook -> chat
+const T1 = 40; // hook -> chat (grain-dissolve)
 const T2 = 40; // chat -> terminal (dither-dissolve)
 const T3 = 60; // terminal -> scaffold layers (grain-dissolve)
 const T4 = 16; // scaffold layers -> framework list
@@ -50,6 +51,15 @@ export function BuildAgentIntro() {
         } as CSSProperties
       }
     >
+      <ShaderGrainGradient
+        colors={["#14110d", "#2a1f15", "#5a4030"]}
+        colorBack="#0a0a0a"
+        shape="blob"
+        softness={0.7}
+        intensity={0.6}
+        noise={0.06}
+        speed={0.4}
+      />
       <TransitionSeries>
         <TransitionSeries.Sequence durationInFrames={HOOK}>
           <Hook />
@@ -57,7 +67,10 @@ export function BuildAgentIntro() {
 
         <TransitionSeries.Transition
           timing={linearTiming({ durationInFrames: T1 })}
-          presentation={whipPan({ direction: "left" })}
+          presentation={grainDissolve({
+            colors: ["#2a221e", "#4a3a32", "#8f7d6e"],
+            colorBack: "#0a0a0a",
+          })}
         />
 
         <TransitionSeries.Sequence durationInFrames={CHAT}>

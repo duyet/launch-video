@@ -7,7 +7,7 @@ import {
   TerminalSimulator,
 } from "@/components/remocn/terminal-simulator";
 import { useCursorPath } from "@/components/remocn/use-cursor-path";
-import { ACCENT, BG } from "@/theme";
+import { ACCENT } from "@/theme";
 
 const LINES: TerminalLine[] = [
   { text: "npx skills add duyet/build-agent", type: "command", delay: 6 },
@@ -74,12 +74,7 @@ function ClickCursor() {
 
 export function TerminalRun() {
   return (
-    <Backdrop
-      fill={{ type: "color", value: BG }}
-      padding={0}
-      radius={0}
-      shadow=""
-    >
+    <Backdrop fill={{ type: "transparent" }} padding={0} radius={0} shadow="">
       <ZoomIn>
         <TerminalSimulator
           lines={LINES}

@@ -1,16 +1,11 @@
 import { CtaLine } from "@/components/CtaLine";
 import { Backdrop } from "@/components/remocn/backdrop";
-import { MicroScaleFade } from "@/components/remocn/micro-scale-fade";
-import { BG, FG, FG_MUTED } from "@/theme";
+import { MaskRevealUp } from "@/components/remocn/mask-reveal-up";
+import { FG, FG_MUTED } from "@/theme";
 
 export function SignOff() {
   return (
-    <Backdrop
-      fill={{ type: "color", value: BG }}
-      padding={0}
-      radius={0}
-      shadow=""
-    >
+    <Backdrop fill={{ type: "transparent" }} padding={0} radius={0} shadow="">
       <div
         style={{
           position: "absolute",
@@ -22,21 +17,23 @@ export function SignOff() {
           gap: 22,
         }}
       >
-        <div style={{ position: "relative", width: 640, height: 90 }}>
-          <MicroScaleFade
+        <div style={{ position: "relative", width: 640, height: 110 }}>
+          <MaskRevealUp
             text="build-agent"
-            fontSize={64}
+            fontSize={88}
             color={FG}
-            speed={1.5}
+            speed={1.2}
+            exit={false}
           />
         </div>
-        <div style={{ position: "relative", width: 760, height: 50 }}>
-          <MicroScaleFade
+        <div style={{ position: "relative", width: 760, height: 44 }}>
+          <MaskRevealUp
             text="Scaffold agents on any framework."
-            fontSize={26}
+            fontSize={24}
             fontWeight={500}
             color={FG_MUTED}
-            speed={1.5}
+            speed={1.4}
+            exit={false}
           />
         </div>
         <div style={{ height: 10 }} />
