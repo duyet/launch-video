@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "interactivity-best-practices": {
+      "source": "Remocn/remocn",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/interactivity-best-practices/SKILL.md",
+      "computedHash": "4e56bff002ebe4c2586424d9ef076f00b36ea2cc8c4b939762c734f01a142c0b"
+    },
+    "remocn": {
+      "source": "Remocn/remocn",
+      "sourceType": "github",
+      "skillPath": "skills/remocn/SKILL.md",
+      "computedHash": "244419f32e09be5d9934115b82441be4166514294ff9b9187e79756daa928233"
+    }
+  }
+}
