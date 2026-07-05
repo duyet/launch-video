@@ -1,18 +1,20 @@
 import { Backdrop } from "@/components/remocn/backdrop";
 import { CtaLine } from "@/components/CtaLine";
-import { DynamicGrid } from "@/components/remocn/dynamic-grid";
 import { InlineHighlight } from "@/components/remocn/inline-highlight";
+import { ShaderNeuroNoise } from "@/components/remocn/shader-neuro-noise";
 import { ACCENT } from "@/theme";
 
 export function Hook() {
   return (
     <Backdrop
       fill={
-        <DynamicGrid
-          background="#0a0a0a"
-          lineColor="#151515"
-          cellSize={48}
-          speed={0.3}
+        <ShaderNeuroNoise
+          colorFront="#4a3a35"
+          colorMid="#2a201d"
+          colorBack="#0a0a0a"
+          brightness={0.06}
+          contrast={0.3}
+          speed={0.25}
         />
       }
       padding={0}
@@ -39,7 +41,7 @@ export function Hook() {
             speed={2.2}
           />
         </div>
-        <CtaLine text="npx skills add duyet/build-agent" appearAt={22} />
+        <CtaLine text="$ npx skills add duyet/build-agent" appearAt={22} />
       </div>
     </Backdrop>
   );

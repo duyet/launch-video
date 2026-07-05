@@ -20,6 +20,7 @@ export interface ClaudeCodeProps {
   cwd?: string;
   placeholder?: string;
   prompt?: string;
+  response?: string[];
   accentColor?: string;
   speed?: number;
 }
@@ -119,6 +120,7 @@ export function ClaudeCode({
   cwd = "/users/meaghan/code/apps",
   placeholder = 'Try "edit <filepath> to ..."',
   prompt = "edit src/theme.ts to add a dark mode toggle",
+  response = [],
   accentColor = "#D97757",
   speed = 1,
 }: ClaudeCodeProps) {
@@ -136,6 +138,9 @@ export function ClaudeCode({
     startFrame: TYPING_START_FRAME,
   });
   const showText = tw.count > 0;
+
+  const typingDoneAtScaled =
+    TYPING_START_FRAME + (prompt.length / TYPING_CPS) * fps;
 
   const intro = introBounceIn(frame * speed, fps);
   const leftFade = fadeUpAt(frame * speed, [6, 22]);
@@ -434,6 +439,36 @@ export function ClaudeCode({
                   </span>
                 )}
               </div>
+
+              {response.length > 0 && (
+                <div
+                  style={{
+                    marginTop: 14,
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 6,
+                  }}
+                >
+                  {response.map((line, i) => {
+                    const start = typingDoneAtScaled + 8 + i * 10;
+                    const r = fadeUpAt(frame * speed, [start, start + 16]);
+                    return (
+                      <div
+                        key={line}
+                        style={{
+                          fontFamily: MONO_FAMILY,
+                          fontSize: 15,
+                          color: t.fgMuted,
+                          opacity: r.opacity,
+                          transform: `translateY(${r.translateY}px)`,
+                        }}
+                      >
+                        {line}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
         </div>

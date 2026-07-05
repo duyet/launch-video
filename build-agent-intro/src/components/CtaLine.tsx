@@ -1,42 +1,66 @@
-import { interpolate, useCurrentFrame } from "remotion";
+import { Easing, interpolate, useCurrentFrame } from "remotion";
 import { ACCENT, FG } from "@/theme";
 
 export function CtaLine({
   text,
   appearAt = 0,
+  fontSize = 38,
 }: {
   text: string;
   appearAt?: number;
+  fontSize?: number;
 }) {
   const frame = useCurrentFrame() - appearAt;
-  const opacity = interpolate(frame, [0, 14], [0, 1], {
+  const words = text.split(" ");
+
+  const distance = 28;
+  const enterDur = 16;
+  const staggerDelay = 3;
+  const wordDur = 6;
+  const easing = Easing.bezier(0.2, 0.8, 0.2, 1);
+
+  const x = interpolate(frame, [0, enterDur], [-distance, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
+    easing,
   });
-  const translateY = interpolate(frame, [0, 14], [10, 0], {
+  const blur = interpolate(frame, [0, enterDur], [4, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
+    easing,
   });
 
   return (
     <div
       style={{
-        opacity,
-        transform: `translateY(${translateY}px)`,
         display: "flex",
-        alignItems: "center",
-        gap: 10,
         fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
-        fontSize: 26,
+        fontSize,
         fontWeight: 500,
-        border: "1px solid #27272a",
-        borderRadius: 8,
-        padding: "12px 20px",
-        background: "#111111",
+        transform: `translateX(${x}px)`,
+        filter: `blur(${blur}px)`,
       }}
     >
-      <span style={{ color: ACCENT }}>$</span>
-      <span style={{ color: FG }}>{text}</span>
+      {words.map((word, i) => {
+        const opacity = interpolate(
+          frame - i * staggerDelay,
+          [0, wordDur],
+          [0, 1],
+          { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing },
+        );
+        return (
+          <span
+            key={i}
+            style={{
+              marginRight: "0.35em",
+              opacity,
+              color: word === "$" ? ACCENT : FG,
+            }}
+          >
+            {word}
+          </span>
+        );
+      })}
     </div>
   );
 }

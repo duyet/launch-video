@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "start": "remotion studio src/index.ts",
-    "build": "remotion render src/index.ts BuildAgentIntro out/build-agent-intro.mp4",
-    "still": "remotion still src/index.ts BuildAgentIntro out/build-agent-intro.png",
+    "build": "remotion render src/index.ts BuildAgentIntro out/build-agent-intro.mp4 --gl=angle",
+    "still": "remotion still src/index.ts BuildAgentIntro out/build-agent-intro.png --gl=angle",
     "upgrade": "remotion upgrade"
   },
   "dependencies": {
+    "@paper-design/shaders-react": "^0.0.77",
     "@remotion/cli": "4.0.484",
     "@remotion/google-fonts": "4.0.484",
     "@remotion/transitions": "4.0.484",

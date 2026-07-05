@@ -1,9 +1,12 @@
 import { Backdrop } from "@/components/remocn/backdrop";
+import { InfiniteMarquee } from "@/components/remocn/infinite-marquee";
 import { MicroScaleFade } from "@/components/remocn/micro-scale-fade";
-import { CtaLine } from "@/components/CtaLine";
 import { BG, FG, FG_MUTED } from "@/theme";
 
-export function SignOff() {
+const FRAMEWORKS =
+  "LangGraph  ·  Vercel AI SDK  ·  eve  ·  Flue  ·  CrewAI  ·  LlamaIndex  ·  Mastra  ·  Google ADK  ·  ";
+
+export function FrameworkList() {
   return (
     <Backdrop fill={{ type: "color", value: BG }} padding={0}>
       <div
@@ -14,23 +17,26 @@ export function SignOff() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          gap: 22,
+          gap: 24,
         }}
       >
-        <div style={{ position: "relative", width: 640, height: 90 }}>
-          <MicroScaleFade text="build-agent" fontSize={64} color={FG} speed={1.5} />
-        </div>
         <div style={{ position: "relative", width: 760, height: 50 }}>
           <MicroScaleFade
-            text="Scaffold agents on any framework."
-            fontSize={26}
+            text="Works with any framework."
+            fontSize={30}
             fontWeight={500}
-            color={FG_MUTED}
-            speed={1.5}
+            color={FG}
           />
         </div>
-        <div style={{ height: 10 }} />
-        <CtaLine text="$ npx skills add duyet/build-agent" appearAt={22} />
+        <div style={{ position: "relative", width: "100%", height: 70 }}>
+          <InfiniteMarquee
+            text={FRAMEWORKS}
+            fontSize={44}
+            fontWeight={600}
+            color={FG_MUTED}
+            pixelsPerFrame={1.6}
+          />
+        </div>
       </div>
     </Backdrop>
   );
